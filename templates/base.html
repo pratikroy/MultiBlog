@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BlueBlog</title>
+    <!-- Bootstrap CDN link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <ul>
+        {% if request.user.is_authenticated %}
+          <h2>You are logged in now</h2>
+          {% block logged_in_nav %}{% endblock %}
+          <li><a href="{% url "logout" %}">Logout</a></li>
+          <li><a href="{% url "all-posts" %}">All posts</a></li>
+        {% else %}
+          <h2>Login/Register to proceed</h2>
+          <li><a href="{% url "login" %}">Login</a></li>
+          <li><a href="{% url "user_registration" %}">Registration</a></li>
+          <li><a href="{% url "all-posts" %}">All posts</a></li>
+        {% endif %}
+      </ul>
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
